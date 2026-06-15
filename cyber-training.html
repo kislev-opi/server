@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Developer Security Mindset: Training Program Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 350px;
+        max-height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 400px;
+        }
+      }
+
+      .transition-all-custom {
+        transition: all 0.3s ease-in-out;
+      }
+
+      .active-tab {
+        border-bottom: 4px solid #2563eb; /* blue-600 */
+        color: #1e3a8a; /* blue-900 */
+        font-weight: bold;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f5f5f4;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #d6d3d1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8a29e;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-stone-50 text-stone-800 font-sans antialiased flex flex-col min-h-screen"
+  >
+    <header
+      class="bg-white shadow-sm border-b border-stone-200 sticky top-0 z-50"
+    >
+      <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-2">
+          <span class="text-2xl" aria-hidden="true">🛡️</span>
+          <h1 class="text-xl font-bold text-stone-900">
+            SecureDev Training Architecture
+          </h1>
+        </div>
+        <nav class="hidden md:flex space-x-8">
+          <button
+            onclick="switchTab('overview')"
+            id="nav-overview"
+            class="text-stone-500 hover:text-blue-700 px-1 py-5 text-sm font-medium active-tab transition-all-custom"
+          >
+            Overview & Objectives
+          </button>
+          <button
+            onclick="switchTab('syllabus')"
+            id="nav-syllabus"
+            class="text-stone-500 hover:text-blue-700 px-1 py-5 text-sm font-medium transition-all-custom"
+          >
+            Core Syllabus
+          </button>
+          <button
+            onclick="switchTab('courses')"
+            id="nav-courses"
+            class="text-stone-500 hover:text-blue-700 px-1 py-5 text-sm font-medium transition-all-custom"
+          >
+            Course Recommendations
+          </button>
+        </nav>
+        <div class="md:hidden">
+          <button
+            onclick="toggleMobileMenu()"
+            class="text-stone-500 hover:text-stone-900"
+            aria-label="Toggle navigation menu"
+          >
+            &#9776;
+          </button>
+        </div>
+      </div>
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white border-b border-stone-200"
+      >
+        <button
+          onclick="
+            switchTab('overview');
+            toggleMobileMenu();
+          "
+          class="block w-full text-left px-4 py-3 text-sm text-stone-700 border-b"
+        >
+          Overview & Objectives
+        </button>
+        <button
+          onclick="
+            switchTab('syllabus');
+            toggleMobileMenu();
+          "
+          class="block w-full text-left px-4 py-3 text-sm text-stone-700 border-b"
+        >
+          Core Syllabus
+        </button>
+        <button
+          onclick="
+            switchTab('courses');
+            toggleMobileMenu();
+          "
+          class="block w-full text-left px-4 py-3 text-sm text-stone-700"
+        >
+          Course Recommendations
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <section id="section-overview" class="animate-fade-in block">
+        <div class="mb-8">
+          <h2 class="text-3xl font-bold text-stone-900 mb-4">
+            Cultivating the Defensive "Blue Team" Mindset
+          </h2>
+          <p class="text-lg text-stone-600 leading-relaxed mb-4">
+            <strong>Context:</strong> Modern software engineering mandates
+            shifting security left into native code design rather than relying
+            on retroactive perimeter patching. When ninety percent of
+            engineering teams lack dedicated cybersecurity experience, systemic
+            organizational risk increases exponentially.
+          </p>
+          <p class="text-lg text-stone-600 leading-relaxed">
+            <strong>Goal:</strong> The operational objective is to build
+            architectural resilience. Rather than transforming developers into
+            penetration testers or exploit specialists, this curriculum instills
+            a structural "Blue Team" mindset, enabling engineers to anticipate
+            logic failures, build secure pipelines, and generate forensic trails
+            natively.
+          </p>
+        </div>
+
+        <div
+          class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 md:p-8 flex flex-col md:flex-row items-center gap-8"
+        >
+          <div class="w-full md:w-1/2">
+            <h3 class="text-xl font-semibold text-stone-800 mb-4">
+              Mindset Shift Analysis
+            </h3>
+            <p class="text-stone-600 mb-4">
+              This model highlights the growth from standard, purely
+              feature-driven code production to a hardened engineering paradigm
+              following the completion of this specialized pedagogical
+              curriculum.
+            </p>
+            <ul class="space-y-3 mt-6">
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-2" aria-hidden="true"
+                  >&#10003;</span
+                >
+                <span class="text-sm text-stone-700"
+                  ><strong>Shift Left:</strong> Incorporate secure validation
+                  loops into regular engineering flows instead of treating
+                  compliance as an afterthought blocker.</span
+                >
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-2" aria-hidden="true"
+                  >&#10003;</span
+                >
+                <span class="text-sm text-stone-700"
+                  ><strong>Forensic Readiness:</strong> Structure detailed,
+                  context-aware telemetry trails to easily interface with
+                  enterprise monitoring clusters.</span
+                >
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-600 mr-2" aria-hidden="true"
+                  >&#10003;</span
+                >
+                <span class="text-sm text-stone-700"
+                  ><strong>Future-Proofing:</strong> Manage unpredictable
+                  stochastic outputs and vulnerability trees unique to emergent
+                  GenAI configurations.</span
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="w-full md:w-1/2 bg-stone-50 rounded-lg p-4">
+            <div class="chart-container">
+              <canvas id="mindsetRadarChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 text-center">
+          <button
+            onclick="switchTab('syllabus')"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-200"
+          >
+            Explore the Syllabus Requirements
+          </button>
+        </div>
+      </section>
+
+      <section id="section-syllabus" class="hidden animate-fade-in">
+        <div class="mb-8">
+          <h2 class="text-3xl font-bold text-stone-900 mb-4">
+            Targeted Curriculum Architecture
+          </h2>
+          <p class="text-lg text-stone-600 leading-relaxed">
+            This syllabus lays down an incremental, non-offensive knowledge
+            pipeline distributed across four high-priority technical boundaries.
+            Expand each section below to inspect the foundational learning nodes
+            required to establish standard engineering resilience.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-6"
+          id="syllabus-grid"
+        ></div>
+
+        <div
+          class="mt-12 p-6 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-between flex-wrap gap-4"
+        >
+          <div>
+            <h4 class="text-lg font-bold text-blue-900">
+              Ready to coordinate specific modules?
+            </h4>
+            <p class="text-sm text-blue-700">
+              Review the validated, vetted platform blueprints configured to
+              resolve these criteria natively.
+            </p>
+          </div>
+          <button
+            onclick="switchTab('courses')"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-sm transition duration-200"
+          >
+            View Recommended Courses
+          </button>
+        </div>
+      </section>
+
+      <section id="section-courses" class="hidden animate-fade-in">
+        <div class="mb-8">
+          <h2 class="text-3xl font-bold text-stone-900 mb-4">
+            Curated Platform Courses
+          </h2>
+          <p class="text-lg text-stone-600 leading-relaxed mb-6">
+            The educational courses listed below have been meticulously selected
+            from Coursera and Udemy. All active choices strictly preserve a
+            defensive, architectural, and systemic perspective, intentionally
+            stripping away high-risk offensive weapon toolsets.
+          </p>
+
+          <div class="flex flex-wrap gap-2 mb-8 border-b border-stone-200 pb-4">
+            <span class="py-2 text-sm font-semibold text-stone-500 mr-2"
+              >Filter by Topic:</span
+            >
+            <button
+              onclick="filterCourses('All')"
+              class="filter-btn active-filter px-4 py-1.5 rounded-full text-sm font-medium bg-stone-200 text-stone-800 hover:bg-stone-300 transition"
+            >
+              All
+            </button>
+            <button
+              onclick="filterCourses('Blue Team')"
+              class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200 border border-stone-300 transition"
+            >
+              Blue Team
+            </button>
+            <button
+              onclick="filterCourses('API Security')"
+              class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200 border border-stone-300 transition"
+            >
+              API Security
+            </button>
+            <button
+              onclick="filterCourses('Forensics')"
+              class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200 border border-stone-300 transition"
+            >
+              Forensics
+            </button>
+            <button
+              onclick="filterCourses('LLM Security')"
+              class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium bg-stone-100 text-stone-600 hover:bg-stone-200 border border-stone-300 transition"
+            >
+              LLM Security
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-6" id="course-list"></div>
+      </section>
+    </main>
+
+    <footer class="bg-stone-100 border-t border-stone-200 mt-auto py-8">
+      <div class="max-w-6xl mx-auto px-4 text-center text-sm text-stone-500">
+        Internal Training Research Report Framework &bull; Designed for
+        Structural Developer Upskilling
+      </div>
+    </footer>
+
+    <script>
+      // --- DATA STORAGE ---
+
+      const syllabusData = [
+        {
+          id: "blueteam",
+          title: "Blue Team & SSDLC Fundamentals",
+          icon: "🛡️",
+          color: "border-blue-200 bg-blue-50 text-blue-900",
+          btnColor: "bg-blue-100 text-blue-700 hover:bg-blue-200",
+          goal: "Establish standard operational safety benchmarks across software iteration cycles.",
+          objectives: [
+            "Threat Modeling Frameworks: Utilizing structural STRIDE methodologies to identify logical boundaries and trace vulnerability surfaces prior to code creation.",
+            "Continuous Automation Enforcements: Hardening code integration loops through automated Static (SAST) and Dynamic (DAST) diagnostic engines.",
+            "Supply Chain Evaluation: Injecting automated Software Composition Analysis (SCA) triggers to continuously audit open-source library and third-party dependency vulnerabilities.",
+            "Target Visualization: Using the interactive MITRE ATT&CK Navigator framework to understand real-world application mapping and adversarial exploit strategies.",
+          ],
+        },
+        {
+          id: "api",
+          title: "API Security Architecture",
+          icon: "🌐",
+          color: "border-emerald-200 bg-emerald-50 text-emerald-900",
+          btnColor: "bg-emerald-100 text-emerald-700 hover:bg-emerald-200",
+          goal: "Mitigate unique application logic flaws across modern distributed stateless microservices.",
+          objectives: [
+            "OWASP API Security Top 10 Tracking: Rooting out systemic authorization structural flaws such as Broken Object Level Authorization (BOLA).",
+            "Robust Access Controls: Native code implementation of production-grade authentication and authorization strategies using OAuth 2.0 and JWTs.",
+            "Centralized Boundary Management: Configuring enterprise API Gateways for rigorous data traffic flow, rate limiting, and parameter validation.",
+            "Telemetry Enforcement: Structuring real-time monitoring streams with analytics dashboards like Prometheus and Grafana to trace anomalous volume footprints.",
+          ],
+        },
+        {
+          id: "forensics",
+          title: "Hardware & Software Forensics",
+          icon: "🔍",
+          color: "border-purple-200 bg-purple-50 text-purple-900",
+          btnColor: "bg-purple-100 text-purple-700 hover:bg-purple-200",
+          goal: "Cultivate forensic readiness inside baseline application footprints to allow definitive breach reconstruction.",
+          objectives: [
+            "Evidentiary Integrity Design: Structuring immutable, context-rich append-only logging properties that safely survive legal chain of custody reviews.",
+            "OS & Artifact Tracking: Demystifying how modern operating file systems, volatile memory stacks, and registry trees isolate operational changes.",
+            "Anti-Forensics Tracking: Spotting adversarial concealment habits including metadata manipulation, stream deletion, and log corruption attempts.",
+            "Physical Root of Trust Implementation: Hardening low-level firmware assets via Trusted Platform Module (TPM) interactions, Secure Boot verification, and full disk encryption (LUKS).",
+          ],
+        },
+        {
+          id: "llm",
+          title: "LLM & Generative AI Security",
+          icon: "🤖",
+          color: "border-orange-200 bg-orange-50 text-orange-900",
+          btnColor: "bg-orange-100 text-orange-700 hover:bg-orange-200",
+          goal: "Safely control stochastic and non-deterministic logic structures within enterprise ecosystems.",
+          objectives: [
+            "Prompt Injection Sanitization: Designing structural interface wrappers to identify, separate, and neutralize system instruction overrides.",
+            "Least Privilege Agency Boundaries: Securing multi-agent task automation chains from systemic threats like Excessive Agency errors.",
+            "Response Grounding Architecting: Implementing localized Retrieval-Augmented Generation (RAG) paradigms to insulate models against data hallucinations.",
+            "Resource Exhaustion Protection: Throttling input complexities to safeguard systems from malicious Unbounded Consumption spikes.",
+          ],
+        },
+      ];
+
+      const coursesData = [
+        {
+          topic: "Blue Team",
+          title: "Secure Coding and SSDLC for Developers",
+          platform: "Coursera",
+          provider: "Edureka",
+          level: "Beginner to Intermediate (~9 Hours)",
+          description:
+            "Establishes the drivers of software risks, threat modeling, SAST/DAST metrics, SCA supply chain evaluations, and MITRE ATT&CK alignment.",
+          link: "https://www.coursera.org/learn/secure-coding-ssdlc-developers",
+          tags: ["SSDLC", "STRIDE", "DevSecOps", "SCA Checkpoints"],
+        },
+        {
+          topic: "API Security",
+          title: "OWASP API Security TOP 10: A comprehensive guide",
+          platform: "Udemy",
+          provider: "El Guenbouri Hamza",
+          level: "All Levels (~2 Hours)",
+          description:
+            "Explores logical endpoint errors from an architectural lens, clarifying systemic remediations for flaws like BOLA and Excessive Data Exposure.",
+          link: "https://www.udemy.com/topic/owasp/",
+          tags: ["OWASP Top 10", "BOLA", "Authorization Logic"],
+        },
+        {
+          topic: "API Security",
+          title: "Protecting and Managing APIs",
+          platform: "Coursera",
+          provider: "Edureka",
+          level: "Intermediate (~3 Weeks Part-time)",
+          description:
+            "Operationalizes defense-in-depth across endpoints via OAuth 2.0 architectures, JSON Web Tokens, Gateway systems, and logging integrations.",
+          link: "https://www.coursera.org/learn/protecting-and-managing-apis",
+          tags: ["OAuth 2.0", "JWT Validation", "API Gateway Layouts"],
+        },
+        {
+          topic: "Forensics",
+          title: "Digital Forensics Investigation Process - The Big Picture",
+          platform: "Udemy",
+          provider: "M. Ismail",
+          level: "Introductory (~3 Hours)",
+          description:
+            "Deconstructs technical investigations, timeline synthesis, case construction, and SIEM/SOAR visibility constraints to direct resilient logging models.",
+          link: "https://www.udemy.com/course/digital-forensics-investigation-process/",
+          tags: ["Forensic Readiness", "SIEM Targetings", "Timeline Design"],
+        },
+        {
+          topic: "Forensics",
+          title: "Digital Forensics Essentials (DFE)",
+          platform: "Coursera",
+          provider: "EC-Council",
+          level: "Intermediate (~30 Hours)",
+          description:
+            "Deep mechanical analysis tracking data layout allocations across systems, memory, filesystems, and raw network traffic captures.",
+          link: "https://www.coursera.org/learn/digital-forensics-essentials-dfe",
+          tags: [
+            "Memory Captures",
+            "Anti-Forensics Counters",
+            "Network Streams",
+          ],
+        },
+        {
+          topic: "Forensics",
+          title: "The Embedded Linux Security Handbook",
+          platform: "Coursera",
+          provider: "Packt",
+          level: "Intermediate (Part-time Series)",
+          description:
+            "Bridges software and hardware defenses by analyzing hardware roots of trust, TPM cryptographic engines, Secure Boot mechanics, and LUKS.",
+          link: "https://www.coursera.org/learn/packt-the-embedded-linux-security-handbook",
+          tags: ["TPM Silicon", "LUKS Full Disk", "Firmware Integrity"],
+        },
+        {
+          topic: "LLM Security",
+          title: "Gen AI Security Foundations",
+          platform: "Udemy",
+          provider: "Jeffrey LEE",
+          level: "All Levels (~1.5 Hours)",
+          description:
+            "Identifies core security flaws spanning training data pipelines, vector database vulnerabilities, prompt processing logic, and consumption costs.",
+          link: "https://www.udemy.com/course/gen-ai-security-foundations/",
+          tags: ["AI Lifecycle", "Vector Embeddings", "Unbounded Consumption"],
+        },
+        {
+          topic: "LLM Security",
+          title: "OWASP Top 10 for Large Language Models",
+          platform: "Udemy",
+          provider: "NextGen Learning",
+          level: "All Levels (~45 Minutes)",
+          description:
+            "Focuses on architectural mitigation strategies including input boundaries, multi-layer output filters, RAG grounding parameters, and least-privilege agency.",
+          link: "https://www.udemy.com/course/owasp-top-10-for-large-language-models/",
+          tags: ["OWASP LLM", "RAG Frameworks", "Excessive Agency Fixes"],
+        },
+      ];
+
+      // --- STATE MANAGEMENT ---
+      let currentTab = "overview";
+      let chartInstance = null;
+
+      // --- CORE INTERACTION HANDLING ---
+
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobile-menu");
+        menu.classList.toggle("hidden");
+      }
+
+      function switchTab(tabId) {
+        document.getElementById("section-overview").classList.add("hidden");
+        document.getElementById("section-syllabus").classList.add("hidden");
+        document.getElementById("section-courses").classList.add("hidden");
+
+        document.getElementById(`section-${tabId}`).classList.remove("hidden");
+
+        ["overview", "syllabus", "courses"].forEach((id) => {
+          const navEl = document.getElementById(`nav-${id}`);
+          if (id === tabId) {
+            navEl.classList.add("active-tab", "text-blue-700");
+            navEl.classList.remove("text-stone-500");
+          } else {
+            navEl.classList.remove("active-tab", "text-blue-700");
+            navEl.classList.add("text-stone-500");
+          }
+        });
+
+        currentTab = tabId;
+
+        if (tabId === "overview" && !chartInstance) {
+          renderRadarChart();
+        }
+      }
+
+      function toggleSyllabusDetails(id) {
+        const content = document.getElementById(`content-${id}`);
+        const btnText = document.getElementById(`btn-text-${id}`);
+        const btnIcon = document.getElementById(`btn-icon-${id}`);
+
+        if (content.classList.contains("hidden")) {
+          content.classList.remove("hidden");
+          btnText.textContent = "Hide Details";
+          btnIcon.innerHTML = "&#9650;";
+        } else {
+          content.classList.add("hidden");
+          btnText.textContent = "View Details";
+          btnIcon.innerHTML = "&#9660;";
+        }
+      }
+
+      function filterCourses(topic) {
+        const buttons = document.querySelectorAll(".filter-btn");
+        buttons.forEach((btn) => {
+          if (btn.textContent.trim() === topic) {
+            btn.classList.add("bg-stone-800", "text-white", "border-stone-800");
+            btn.classList.remove(
+              "bg-stone-100",
+              "bg-stone-200",
+              "text-stone-600",
+              "text-stone-800",
+              "border-stone-300",
+            );
+          } else {
+            btn.classList.remove(
+              "bg-stone-800",
+              "text-white",
+              "border-stone-800",
+            );
+            btn.classList.add(
+              "bg-stone-100",
+              "text-stone-600",
+              "border-stone-300",
+            );
+          }
+        });
+
+        renderCourses(topic);
+      }
+
+      // --- RENDER FUNCTIONS ---
+
+      function renderSyllabus() {
+        const container = document.getElementById("syllabus-grid");
+        container.innerHTML = "";
+
+        syllabusData.forEach((mod) => {
+          const objectivesHtml = mod.objectives
+            .map(
+              (obj) =>
+                `<li class="flex items-start text-sm mb-2 text-stone-700">
+                        <span class="mr-2 text-stone-400" aria-hidden="true">&#8226;</span>
+                        <span>${obj}</span>
+                    </li>`,
+            )
+            .join("");
+
+          const cardHtml = `
+                    <div class="bg-white rounded-xl shadow-sm border ${mod.color} overflow-hidden transition-all-custom hover:shadow-md">
+                        <div class="p-6">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="text-3xl bg-white p-2 rounded-lg shadow-sm border border-stone-100" aria-hidden="true">${mod.icon}</div>
+                                <h3 class="text-xl font-bold">${mod.title}</h3>
+                            </div>
+                            <p class="text-stone-600 font-medium mb-6">${mod.goal}</p>
+                            
+                            <button onclick="toggleSyllabusDetails('${mod.id}')" class="w-full flex items-center justify-between px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-200 ${mod.btnColor}">
+                                <span id="btn-text-${mod.id}">View Details</span>
+                                <span id="btn-icon-${mod.id}" aria-hidden="true">&#9660;</span>
+                            </button>
+                            
+                            <div id="content-${mod.id}" class="hidden mt-4 pt-4 border-t border-stone-200/50">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-stone-500 mb-3">Key Learning Nodes</h4>
+                                <ul class="pl-1">
+                                    ${objectivesHtml}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+          container.innerHTML += cardHtml;
+        });
+      }
+
+      function renderCourses(filterTopic = "All") {
+        const container = document.getElementById("course-list");
+        container.innerHTML = "";
+
+        const filtered =
+          filterTopic === "All"
+            ? coursesData
+            : coursesData.filter((c) => c.topic === filterTopic);
+
+        if (filtered.length === 0) {
+          container.innerHTML = `<p class="text-stone-500 italic">No courses found for this criteria filter.</p>`;
+          return;
+        }
+
+        filtered.forEach((course) => {
+          const platformColor =
+            course.platform === "Coursera"
+              ? "text-blue-700 bg-blue-100"
+              : "text-purple-700 bg-purple-100";
+          const tagsHtml = course.tags
+            .map(
+              (tag) =>
+                `<span class="inline-block bg-stone-100 text-stone-600 text-xs px-2 py-1 rounded border border-stone-200 mr-2 mt-2">${tag}</span>`,
+            )
+            .join("");
+
+          const cardHtml = `
+                    <div class="bg-white rounded-lg p-6 border border-stone-200 shadow-sm hover:border-blue-300 transition-colors flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="px-2.5 py-0.5 rounded text-xs font-bold ${platformColor}">${course.platform}</span>
+                                <span class="text-xs font-semibold text-stone-500 uppercase tracking-wider">${course.topic}</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-stone-900 mb-1">${course.title}</h3>
+                            <p class="text-sm text-stone-500 mb-3">Author/Provider: <strong>${course.provider}</strong> &bull; Length: ${course.level}</p>
+                            <p class="text-stone-700 text-sm md:text-base leading-relaxed max-w-3xl">${course.description}</p>
+                            <div class="mt-2 flex flex-wrap">
+                                ${tagsHtml}
+                            </div>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex-shrink-0">
+                            <a href="${course.link}" target="_blank" rel="noopener noreferrer" class="inline-block border-2 border-stone-300 hover:border-stone-800 text-stone-800 hover:bg-stone-800 hover:text-white font-medium py-2 px-6 rounded-lg transition-colors text-sm">
+                                Explore Link &rarr;
+                            </a>
+                        </div>
+                    </div>
+                `;
+          container.innerHTML += cardHtml;
+        });
+      }
+
+      function renderRadarChart() {
+        const ctx = document
+          .getElementById("mindsetRadarChart")
+          .getContext("2d");
+
+        chartInstance = new Chart(ctx, {
+          type: "radar",
+          data: {
+            labels: [
+              "API Architecture",
+              "Defensive Logic (Blue)",
+              "Forensic Awareness",
+              "LLM Threat Model",
+              "Secure Coding",
+            ],
+            datasets: [
+              {
+                label: "Standard Baseline (Current)",
+                data: [50, 15, 10, 10, 40],
+                fill: true,
+                backgroundColor: "rgba(168, 162, 158, 0.2)",
+                borderColor: "rgb(168, 162, 158)",
+                pointBackgroundColor: "rgb(168, 162, 158)",
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: "rgb(168, 162, 158)",
+              },
+              {
+                label: "Target Mindset (Post-Training)",
+                data: [95, 90, 80, 85, 95],
+                fill: true,
+                backgroundColor: "rgba(37, 99, 235, 0.2)",
+                borderColor: "rgb(37, 99, 235)",
+                pointBackgroundColor: "rgb(37, 99, 235)",
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: "rgb(37, 99, 235)",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "bottom",
+                labels: { font: { family: "sans-serif" } },
+              },
+              tooltip: {
+                callbacks: {
+                  title: function (context) {
+                    return context[0].label;
+                  },
+                  label: function (context) {
+                    return `${context.dataset.label}: ${context.raw}/100`;
+                  },
+                },
+              },
+            },
+            scales: {
+              r: {
+                angleLines: {
+                  color: "rgba(0, 0, 0, 0.1)",
+                },
+                grid: {
+                  color: "rgba(0, 0, 0, 0.05)",
+                },
+                pointLabels: {
+                  font: {
+                    size: 11,
+                    family: "sans-serif",
+                    weight: "bold",
+                  },
+                  color: "#444",
+                },
+                ticks: {
+                  min: 0,
+                  max: 100,
+                  stepSize: 20,
+                  display: false,
+                },
+              },
+            },
+          },
+        });
+      }
+
+      // --- INITIALIZATION ---
+      document.addEventListener("DOMContentLoaded", () => {
+        renderRadarChart();
+        renderSyllabus();
+
+        const allBtn = document.querySelector(".filter-btn");
+        allBtn.classList.add("bg-stone-800", "text-white", "border-stone-800");
+        allBtn.classList.remove("bg-stone-200", "text-stone-800");
+
+        renderCourses("All");
+      });
+    </script>
+  </body>
+</html>
