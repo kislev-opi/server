@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>השוואת מסלולי הנדסה ומדעים 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Assistant", sans-serif;
+        background-color: #fdfbf7;
+        color: #333;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 400px;
+        max-height: 500px;
+      }
+      .nav-link.active {
+        border-bottom: 2px solid #c2410c;
+        color: #c2410c;
+      }
+      .degree-card {
+        transition: transform 0.2s;
+      }
+      .degree-card:hover {
+        transform: translateY(-5px);
+      }
+      @media (max-width: 768px) {
+        .chart-container {
+          height: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body class="p-0 m-0">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <div
+        class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-2xl font-bold text-orange-800">
+          מצפן אקדמי: הנדסת חשמל וחלופותיה
+        </h1>
+        <nav class="hidden md:flex gap-6">
+          <a href="#comparison" class="nav-link font-semibold">השוואת נושאים</a>
+          <a href="#timeline" class="nav-link font-semibold">צפי זמנים</a>
+          <a href="#ai-era" class="nav-link font-semibold">עידן ה-AI</a>
+          <a href="#the-solution" class="nav-link font-semibold text-orange-600"
+            >אפיק המעבר</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+      <!-- Intro Paragraph -->
+      <section class="mb-12 text-center max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4">
+          איזה תואר יכין אותך הכי טוב לשוק של 2026?
+        </h2>
+        <p class="text-lg text-gray-600">
+          בחירת מסלול לימודים היא החלטה אסטרטגית. מכיוון שהאוניברסיטה הפתוחה
+          אינה מציעה תואר ישיר בהנדסת חשמל, עלינו לנתח איזו מהחלופות מעניקה את
+          התשתית הקרובה ביותר לליבת המקצוע – המשלבת פיזיקה יישומית, חומרה
+          ואלגוריתמיקה. באפליקציה זו נשווה את נושאי הלימוד, נחשב את זמן הסיום
+          הריאלי עבור סטודנט עובד, ונבחן אילו דלתות יפתחו בפניך בעולם שנשלט על
+          ידי בינה מלאכותית.
+        </p>
+      </section>
+
+      <!-- Subjects Comparison Section -->
+      <section
+        id="comparison"
+        class="mb-16 bg-white p-6 rounded-2xl shadow-md border border-orange-50"
+      >
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold mb-2">
+            1. השוואת נושאי לימוד וקרבה להנדסת חשמל
+          </h3>
+          <p class="text-gray-600 italic">
+            השוואה ויזואלית של תחומי הידע המרכזיים בין הנדסת חשמל (TAU) לחלופות
+            האו"פ.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div class="chart-container">
+            <canvas id="comparisonChart"></canvas>
+          </div>
+          <div class="space-y-4 text-sm md:text-base">
+            <div
+              class="bg-orange-50 p-4 rounded-lg border-r-4 border-orange-500"
+            >
+              <h4 class="font-bold text-orange-900 mb-1">
+                מנצח הקרבה: דו-חוגי פיזיקה ומדמ"ח
+              </h4>
+              <p>
+                המסלול היחיד שמעניק גם את התשתית הפיזיקלית של חומרה (קוונטים
+                ומצב מוצק) וגם את הכלים התוכנתיים העמוקים של מדעי המחשב.
+              </p>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg border-r-4 border-blue-500">
+              <h4 class="font-bold text-blue-900 mb-1">
+                הפער במדעי המחשב/הנדסת תוכנה
+              </h4>
+              <p>
+                מסלולים אלו ממוקדים ב-100% בלוגיקה ותוכנה. הם חסרים לחלוטין את
+                הפיזיקה של האלקטרונים, מה שמרחיק אותם מעולם החשמל והחומרה.
+              </p>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg border-r-4 border-green-500">
+              <h4 class="font-bold text-green-900 mb-1">פיזיקה חד-חוגי</h4>
+              <p>
+                קרוב מאוד לחשמל ברמת התיאוריה הפיזיקלית, אך סובל מחוסר משמעותי
+                במיומנויות תכנות וארכיטקטורת מחשבים הנדרשים בתעשייה.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline Section -->
+      <section id="timeline" class="mb-16">
+        <div class="mb-8 text-center">
+          <h3 class="text-2xl font-bold mb-2">2. כמה זמן זה באמת ייקח?</h3>
+          <p class="text-gray-600">
+            חישוב לפי קצב של 5 קורסים בשנה + שנה נוספת (Slack) להשלמות וסמסטרי
+            קיץ.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="timelineGrid">
+          <!-- Data populated by JS -->
+        </div>
+
+        <p class="mt-6 text-center text-sm text-red-600 font-medium">
+          שימו לב: תארים של מעל 150 נ"ז באו"פ בקצב חלקי עשויים להימשך קרוב ל-8
+          שנים!
+        </p>
+      </section>
+
+      <!-- AI Era & Future Section -->
+      <section
+        id="ai-era"
+        class="mb-16 bg-gray-900 text-white p-8 rounded-3xl overflow-hidden relative"
+      >
+        <div class="relative z-10">
+          <h3 class="text-3xl font-bold mb-6">
+            3. ניתוח אסטרטגי: שוק העבודה 2026 ועידן ה-AI
+          </h3>
+          <p class="mb-8 text-gray-300">
+            הבינה המלאכותית משנה את חוקי המשחק. כתיבת קוד הופכת לאוטומטית, אך
+            הנדסת חומרה ותשתיות פיזיקליות נותרות "חסינות" וקריטיות יותר מאי פעם.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div
+              class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20"
+            >
+              <div class="text-orange-400 text-3xl mb-4">⚙️</div>
+              <h4 class="text-xl font-bold mb-2">חומרה ו-Physical AI</h4>
+              <p class="text-sm text-gray-300">
+                הצורך במעבדי AI, שרתים ותשתיות אנרגיה חכמות מקפיץ את הביקוש
+                למהנדסי חשמל ופיזיקאים. זהו התחום הכי "מוגן" מאוטומציה.
+              </p>
+            </div>
+            <div
+              class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20"
+            >
+              <div class="text-blue-400 text-3xl mb-4">💻</div>
+              <h4 class="text-xl font-bold mb-2">מדעי הנתונים ו-ML</h4>
+              <p class="text-sm text-gray-300">
+                התמחות קריטית. מי שמפתח את המודלים עצמם (ולא רק משתמש בהם) ייהנה
+                ממשכורות שיא, אך התחרות מול בוגרי תואר שני תהיה עזה.
+              </p>
+            </div>
+            <div
+              class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20"
+            >
+              <div class="text-red-400 text-3xl mb-4">⚠️</div>
+              <h4 class="text-xl font-bold mb-2">סיכון הג'וניורים בתוכנה</h4>
+              <p class="text-sm text-gray-300">
+                מתכנתים "פשוטים" (Junior Devs) נמצאים בסיכון הגבוה ביותר להחלפה
+                על ידי סוכני AI. ידע רב-תחומי הוא המפתח להישרדות.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pros and Cons Section -->
+      <section class="mb-16">
+        <h3 class="text-2xl font-bold mb-8 text-center">
+          4. יתרונות וחסרונות של כל מסלול
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="prosConsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- The "Game Changer" Section -->
+      <section
+        id="the-solution"
+        class="bg-orange-600 text-white p-10 rounded-3xl shadow-2xl transform hover:scale-[1.01] transition-all"
+      >
+        <div class="flex flex-col md:flex-row items-center gap-8">
+          <div class="flex-1">
+            <h3 class="text-4xl font-black mb-4">המלצת הזהב: אפיק המעבר</h3>
+            <p class="text-xl mb-6 opacity-90">
+              למה להתפשר על "כמעט" כשאפשר לקבל את הדבר האמיתי? אפיק המעבר הוא
+              הדרך המהירה והבטוחה ביותר לתואר מהנדס חשמל מלא (B.Sc.) באוניברסיטת
+              תל אביב.
+            </p>
+            <ul class="space-y-3 mb-6">
+              <li class="flex items-center gap-2">
+                <span>✅</span> ללא פסיכומטרי ובגרות - קבלה על סמך ציונים באו"פ.
+              </li>
+              <li class="flex items-center gap-2">
+                <span>✅</span> מעבר ישיר לשנה ב' או ג' בתל אביב.
+              </li>
+              <li class="flex items-center gap-2">
+                <span>✅</span> במידה ולא עמדת ברף, כל הקורסים נחשבים לתואר
+                בפיזיקה/מדמ"ח באו"פ.
+              </li>
+            </ul>
+            <div class="bg-white/20 p-4 rounded-lg inline-block text-sm">
+              <span class="font-bold">דרישת סף:</span> ממוצע 85-90 בקורסי הליבה
+              (חדו"א, לינארית, פיזיקה, מבני נתונים).
+            </div>
+          </div>
+          <div
+            class="bg-white text-orange-700 p-6 rounded-2xl shadow-inner text-center w-full md:w-64"
+          >
+            <div class="text-4xl font-bold mb-2">90%</div>
+            <div class="text-sm font-semibold uppercase tracking-wider">
+              חפיפת קורסים
+            </div>
+            <p class="text-xs mt-2 opacity-75">
+              בין קורסי האפיק למסלול הדו-חוגי פיזיקה-מדמ"ח באו"פ
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-gray-100 py-12 border-t mt-12">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <p class="text-gray-500 text-sm">
+          ניתוח אקדמי המבוסס על נתוני האוניברסיטה הפתוחה ואוניברסיטת תל אביב
+          לשנת 2025-2026.
+        </p>
+        <p class="text-gray-400 text-xs mt-2">
+          האפליקציה נועדה לסיוע בקבלת החלטות בלבד. יש להתעדכן בידיעוני המוסדות
+          הרשמיים.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Data Models
+      const degreeData = [
+        {
+          name: "פיזיקה ומדעי המחשב (דו-חוגי)",
+          credits: 152,
+          years: 7.5,
+          aiResistance: 95,
+          closenessToEE: 90,
+          pros: ["הכי קרוב להנדסת חשמל", "ידע בחומרה ותוכנה", "יוקרה אקדמית"],
+          cons: ["קושי קיצוני", "תואר ארוך מאוד", "שחיקה גבוהה"],
+          subjects: [90, 95, 85, 90, 80], // Math, Physics, Hardware, Software, AI/Data
+        },
+        {
+          name: "הנדסת תוכנה",
+          credits: 160,
+          years: 8,
+          aiResistance: 70,
+          closenessToEE: 40,
+          pros: [
+            "תואר הנדסי (B.Sc)",
+            "פרויקט גמר מעשי",
+            "רישום בפנקס המהנדסים",
+          ],
+          cons: ["ארוך ללא הצדקה שוקית", "חוסר מוחלט בפיזיקה", "רחוק מחומרה"],
+          subjects: [80, 0, 40, 100, 75],
+        },
+        {
+          name: "פיזיקה (חד-חוגי)",
+          credits: 132,
+          years: 6.5,
+          aiResistance: 85,
+          closenessToEE: 70,
+          pros: ["הבנה עמוקה של חוקי הטבע", "בסיס חזק למחקר", "קצר יותר"],
+          cons: [
+            "חוסר במיומנויות תכנות",
+            "קשה להשתלב בהייטק מיד",
+            "צורך בהשלמות",
+          ],
+          subjects: [95, 100, 70, 20, 30],
+        },
+        {
+          name: "מדעי המחשב (חד-חוגי)",
+          credits: 120,
+          years: 5.5,
+          aiResistance: 65,
+          closenessToEE: 35,
+          pros: ["המסלול המהיר לשוק", "הכי פרקטי לתכנות", "גמישות מרבית"],
+          cons: [
+            "שוק רווי ב'ג'וניורים'",
+            "אפס חומרה/פיזיקה",
+            "סיכון גבוה לאוטומציה",
+          ],
+          subjects: [85, 0, 30, 100, 70],
+        },
+        {
+          name: 'מדמ"ח + מדעי הנתונים',
+          credits: 121,
+          years: 6,
+          aiResistance: 90,
+          closenessToEE: 45,
+          pros: ["התמחות הכי מבוקשת", "שכר גבוה מאוד", "כלים לעבודה עם AI"],
+          cons: [
+            "מתמטיקה סטטיסטית כבדה",
+            "לא קשור לחשמל",
+            "תחרות מול תארים מתקדמים",
+          ],
+          subjects: [90, 0, 30, 95, 100],
+        },
+        {
+          name: 'מדמ"ח + סייבר',
+          credits: 120,
+          years: 5.5,
+          aiResistance: 80,
+          closenessToEE: 30,
+          pros: [
+            "ביקוש יציב (ביטחוני)",
+            "הכשרה ממוקדת הגנה",
+            "מעניין טכנולוגית",
+          ],
+          cons: ["רחוק מאוד מעולם הפיזיקה", "ממוקד לוגיקה בלבד", "תחום רווי"],
+          subjects: [80, 0, 45, 95, 60],
+        },
+      ];
+
+      const benchmarkEE = [95, 100, 100, 75, 70]; // TAU Electrical Engineering Profile
+
+      // Radar Chart Initialization
+      function initChart() {
+        const ctx = document.getElementById("comparisonChart").getContext("2d");
+        new Chart(ctx, {
+          type: "radar",
+          data: {
+            labels: [
+              "מתמטיקה",
+              "פיזיקה",
+              "חומרה/מערכות",
+              "פיתוח תוכנה",
+              "AI ודאטה",
+            ],
+            datasets: [
+              {
+                label: "הנדסת חשמל (TAU)",
+                data: benchmarkEE,
+                backgroundColor: "rgba(194, 65, 12, 0.2)",
+                borderColor: "#c2410c",
+                pointBackgroundColor: "#c2410c",
+                borderWidth: 2,
+              },
+              {
+                label: 'דו-חוגי פיזיקה-מדמ"ח (או"פ)',
+                data: degreeData[0].subjects,
+                backgroundColor: "rgba(30, 58, 138, 0.1)",
+                borderColor: "#1e3a8a",
+                pointBackgroundColor: "#1e3a8a",
+                borderWidth: 2,
+                hidden: false,
+              },
+            ],
+          },
+          options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            scales: {
+              r: {
+                angleLines: { display: true },
+                suggestedMin: 0,
+                suggestedMax: 100,
+                ticks: { display: false },
+              },
+            },
+            plugins: {
+              legend: { position: "bottom", labels: { font: { size: 12 } } },
+            },
+          },
+        });
+      }
+
+      // Timeline and Cards Rendering
+      function renderUI() {
+        const timelineGrid = document.getElementById("timelineGrid");
+        const prosConsGrid = document.getElementById("prosConsGrid");
+
+        degreeData.forEach((degree) => {
+          // Timeline Cards
+          const tCard = document.createElement("div");
+          tCard.className =
+            "bg-white p-6 rounded-xl shadow border-t-4 border-orange-500 degree-card";
+          tCard.innerHTML = `
+                    <h4 class="font-bold text-lg mb-2">${degree.name}</h4>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="block text-3xl font-black text-orange-600">${degree.years}</span>
+                            <span class="text-xs text-gray-500 uppercase">שנים לסיום</span>
+                        </div>
+                        <div class="text-left">
+                            <span class="block text-sm font-bold text-gray-700">${degree.credits} נ"ז</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-gray-100 h-2 rounded-full overflow-hidden">
+                        <div class="bg-orange-500 h-full" style="width: ${(degree.years / 8) * 100}%"></div>
+                    </div>
+                `;
+          timelineGrid.appendChild(tCard);
+
+          // Pros/Cons Cards
+          const pcCard = document.createElement("div");
+          pcCard.className =
+            "bg-white rounded-2xl shadow-sm border overflow-hidden flex flex-col";
+          pcCard.innerHTML = `
+                    <div class="bg-gray-50 p-4 border-b">
+                        <h4 class="font-bold text-xl">${degree.name}</h4>
+                        <div class="mt-2 flex items-center gap-2">
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-blue-100 text-blue-700">עמידות AI: ${degree.aiResistance}%</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-orange-100 text-orange-700">קרבה לחשמל: ${degree.closenessToEE}%</span>
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 grid grid-cols-2 gap-4">
+                        <div>
+                            <span class="block text-xs font-bold text-green-600 mb-2 uppercase tracking-wide">יתרונות</span>
+                            <ul class="text-sm space-y-1">
+                                ${degree.pros.map((p) => `<li class="flex items-start gap-1"><span>•</span> ${p}</li>`).join("")}
+                            </ul>
+                        </div>
+                        <div class="border-r pr-4">
+                            <span class="block text-xs font-bold text-red-600 mb-2 uppercase tracking-wide">חסרונות</span>
+                            <ul class="text-sm space-y-1">
+                                ${degree.cons.map((c) => `<li class="flex items-start gap-1"><span>•</span> ${c}</li>`).join("")}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+          prosConsGrid.appendChild(pcCard);
+        });
+      }
+
+      // Initialize
+      window.onload = () => {
+        initChart();
+        renderUI();
+      };
+
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
