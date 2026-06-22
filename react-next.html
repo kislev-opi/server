@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Next 2026 - Agenda</title>
+    <style>
+      :root {
+        --primary: #0070f3; /* React/Next.js feel */
+        --primary-hover: #0051b3;
+        --bg-color: #fafafa;
+        --card-bg: #ffffff;
+        --border: #eaeaea;
+        --text-main: #111111;
+        --text-muted: #666666;
+        --accent: #f5f5f5;
+        --radius: 12px;
+        --shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.05);
+        --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.1);
+        --transition: all 0.2s ease-in-out;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        padding: 2rem;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        margin-bottom: 3rem;
+        background: linear-gradient(to right, #0070f3, #f81ce5);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: var(--card-bg);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+
+      th,
+      td {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      th {
+        background-color: var(--card-bg);
+        color: var(--text-muted);
+        text-align: left;
+        font-weight: 500;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 2px solid var(--border);
+      }
+
+      th:not(:last-child),
+      td:not(:last-child) {
+        border-right: 1px solid var(--border);
+      }
+
+      .time-col {
+        width: 15%;
+        font-weight: 600;
+        color: var(--text-main);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .hall-col {
+        width: 42.5%;
+      }
+
+      /* Common Events (Lunch, Breaks) */
+      .common-event {
+        text-align: center;
+        background-color: var(--accent);
+        font-weight: 600;
+        color: var(--text-muted);
+        font-size: 1rem;
+        letter-spacing: 0.02em;
+      }
+
+      .common-event a {
+        color: var(--text-main);
+        text-decoration: none;
+        display: block;
+        border-radius: var(--radius);
+        transition: var(--transition);
+      }
+
+      .common-event a:hover {
+        color: var(--primary);
+      }
+
+      /* Session Cards */
+      .session-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        padding: 1rem;
+        margin: -1rem; /* Negate td padding for full click area */
+        border-radius: var(--radius);
+        transition: var(--transition);
+        height: calc(100% + 2rem);
+      }
+
+      .session-link:hover {
+        background-color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      .session-title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-main);
+        transition: color 0.2s;
+        line-height: 1.4;
+      }
+
+      .session-link:hover .session-title {
+        color: var(--primary);
+      }
+
+      .session-speaker {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+      }
+
+      /* Sub-sessions (e.g., lightning talks) */
+      .sub-session {
+        margin-bottom: 1.5rem;
+        border-bottom: 1px dashed var(--border);
+        padding-bottom: 1.5rem;
+      }
+
+      .sub-session:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .sub-time {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--primary);
+        background: rgba(0, 112, 243, 0.1);
+        padding: 2px 8px;
+        border-radius: 99px;
+        margin-bottom: 0.5rem;
+      }
+
+      .empty-slot {
+        color: #ccc;
+        font-style: italic;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 0.9rem;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+          display: block;
+        }
+
+        thead {
+          display: none;
+        }
+
+        table {
+          background: transparent;
+          border: none;
+          box-shadow: none;
+        }
+
+        tr {
+          background: var(--card-bg);
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          margin-bottom: 1.5rem;
+          box-shadow: var(--shadow);
+          overflow: hidden;
+        }
+
+        td {
+          border: none !important;
+          border-bottom: 1px solid var(--border) !important;
+          position: relative;
+        }
+
+        .time-col {
+          width: 100%;
+          background-color: var(--accent);
+          text-align: center;
+          border-bottom: 2px solid var(--border) !important;
+        }
+
+        td:nth-of-type(2):not(.common-event):before,
+        td:nth-of-type(3):not(.common-event):before {
+          content: "Hall A";
+          display: block;
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--text-muted);
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+        }
+
+        td:nth-of-type(3):not(.common-event):before {
+          content: "Hall B";
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>React Next 2026</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="time-col">Time</th>
+            <th class="hall-col">Hall A</th>
+            <th class="hall-col">Hall B</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="time-col">08:00 - 09:00</td>
+            <td colspan="2" class="common-event">Check-in & Light Breakfast</td>
+          </tr>
+          <tr>
+            <td class="time-col">09:00 - 09:30</td>
+            <td colspan="2" class="common-event">Opening Words</td>
+          </tr>
+          <tr>
+            <td class="time-col">09:30 - 10:00</td>
+            <td>
+              <a
+                href="https://react-next.com/events/frontend-after-the-ai-shift/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">Frontend After the AI Shift</div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Amit Sheen
+                </div>
+              </a>
+            </td>
+            <td>
+              <div class="empty-slot">No session scheduled</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="time-col">10:05 - 10:35</td>
+            <td>
+              <a
+                href="https://react-next.com/events/react-runs-your-terminal-lets-build-one-live/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  React Runs Your Terminal: Let’s Build One Live
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Tal Moskovich
+                </div>
+              </a>
+            </td>
+            <td>
+              <a
+                href="https://react-next.com/events/you-dont-need-to-worry-about-accessibility-with-ai-or-do-you/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  You Don’t Need to Worry About Accessibility with AI (Or Do
+                  You?)
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Maya Shavin
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="time-col">10:40 - 11:10</td>
+            <td>
+              <a
+                href="https://react-next.com/events/design-to-code-in-2026-context-first-development-with-figma-mcp/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  Design to Code in 2026: Context-First Development with Figma
+                  MCP
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Liron Bregman
+                </div>
+              </a>
+            </td>
+            <td>
+              <a
+                href="https://react-next.com/events/the-web-is-forking/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">The Web is Forking</div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Nir Parisian
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="time-col">11:15 - 11:30</td>
+            <td colspan="2" class="common-event">Snacks & Coffee Break</td>
+          </tr>
+          <tr>
+            <td class="time-col">11:30 - 12:00</td>
+            <td>
+              <a
+                href="https://react-next.com/events/server-side-apps-not-server-side-rendering-the-real-alternative-to-react/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  Server-Side Apps, Not Server-Side Rendering: The Real
+                  Alternative to React
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Gil Tayar
+                </div>
+              </a>
+            </td>
+            <td>
+              <a
+                href="https://react-next.com/events/from-prompt-to-multi-agent-system-building-specialized-agents-for-code-review/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  From Prompt to Multi-Agent System: Building Specialized Agents
+                  for Code Review
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Hila Fox
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="time-col">12:05 - 12:35</td>
+            <td>
+              <a
+                href="https://react-next.com/events/what-makes-good-ui-work-lessons-from-cognitive-psychology/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  What Makes Good UI Work: Lessons from Cognitive Psychology
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Keren Kenzi
+                </div>
+              </a>
+            </td>
+            <td>
+              <a
+                href="https://react-next.com/events/from-8-years-to-6-months-orchestrating-ai-agents-for-large-scale-refactoring/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  From 8 Years to 6 Months: Orchestrating AI Agents for
+                  Large-Scale Refactoring
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                  Amit Hanoch, Alon Segal
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="time-col">12:40 - 13:10</td>
+            <td>
+              <a
+                href="https://react-next.com/events/self-healing-ui-building-resilient-react-apps-with-local-ai/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  Self-Healing UI: Building Resilient React Apps with Local AI
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Oren Efraim
+                </div>
+              </a>
+            </td>
+            <td>
+              <a
+                href="https://react-next.com/events/beyond-scraping-the-future-of-web-data-access-with-webmcp/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  Beyond Scraping: The Future of Web Data Access with WebMCP
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Yanai Edri
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="time-col">13:15 - 13:45</td>
+            <td>
+              <a
+                href="https://react-next.com/events/building-typesafe-styling-toolchain-with-panda-css/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="sub-time">13:15 - 13:45</div>
+                <div class="session-title">
+                  Building Typesafe Styling Toolchain with Panda CSS
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Didi Medina
+                </div>
+              </a>
+            </td>
+            <td>
+              <a
+                href="https://react-next.com/events/preparing-ui-ahead-of-time-with-reacts-activity-component/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="sub-time">13:15 - 13:30</div>
+                <div class="session-title">
+                  Preparing UI Ahead of Time with React’s Activity Component
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Adir Kandel
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="time-col">13:45 - 14:35</td>
+            <td colspan="2" class="common-event">Lunch Break</td>
+          </tr>
+          <tr>
+            <td class="time-col">14:35 - 15:25</td>
+            <td>
+              <a
+                href="https://react-next.com/events/panel-did-ai-kill-frontend/"
+                class="session-link"
+                style="height: auto"
+                target="_blank"
+              >
+                <div class="sub-session">
+                  <div class="sub-time">14:35 - 15:25</div>
+                  <div class="session-title">
+                    Panel: “Did AI Kill Frontend?”
+                  </div>
+                  <div class="session-speaker">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Shahar Polak, Michal Hershkovitz, Nir Kaufman, Gil Tayar,
+                    Ariel Shulman
+                  </div>
+                </div>
+              </a>
+            </td>
+            <td style="padding: 0">
+              <a
+                href="https://react-next.com/events/mastering-the-react-cache-api/"
+                class="session-link"
+                style="
+                  margin: 0;
+                  border-radius: 0;
+                  border-bottom: 1px solid var(--border);
+                  height: auto;
+                "
+                target="_blank"
+              >
+                <div
+                  class="sub-session"
+                  style="border: none; padding-bottom: 0"
+                >
+                  <div class="sub-time">14:35 - 14:50</div>
+                  <div class="session-title">Mastering the React Cache API</div>
+                  <div class="session-speaker">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Gil Fink
+                  </div>
+                </div>
+              </a>
+              <a
+                href="https://react-next.com/events/component-testing-in-2026-the-return-of-the-browser/"
+                class="session-link"
+                style="
+                  margin: 0;
+                  border-radius: 0;
+                  border-bottom: 1px solid var(--border);
+                  height: auto;
+                "
+                target="_blank"
+              >
+                <div
+                  class="sub-session"
+                  style="border: none; padding-bottom: 0"
+                >
+                  <div class="sub-time">14:50 - 15:05</div>
+                  <div class="session-title">
+                    Component Testing in 2026: The Return of the Browser
+                  </div>
+                  <div class="session-speaker">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Guy Nesher
+                  </div>
+                </div>
+              </a>
+              <a
+                href="https://react-next.com/events/this-is-not-a-story-about-ai-replacing-libraries/"
+                class="session-link"
+                style="margin: 0; border-radius: 0; height: auto"
+                target="_blank"
+              >
+                <div
+                  class="sub-session"
+                  style="border: none; padding-bottom: 0"
+                >
+                  <div class="sub-time">15:10 - 15:25</div>
+                  <div class="session-title">
+                    This Is Not a Story About AI Replacing Libraries
+                  </div>
+                  <div class="session-speaker">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    Amit Brickman
+                  </div>
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="time-col">15:30 - 15:45</td>
+            <td>
+              <a
+                href="https://react-next.com/events/your-ui-has-left-the-building-building-interfaces-that-write-themselves/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  Your UI Has Left the Building: Building Interfaces That Write
+                  Themselves
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Sara Rakovsky
+                </div>
+              </a>
+            </td>
+            <td>
+              <a
+                href="https://react-next.com/events/autonomous-testing-agents-with-llms-in-react/"
+                class="session-link"
+                target="_blank"
+              >
+                <div class="session-title">
+                  Autonomous Testing Agents with LLMs in React
+                </div>
+                <div class="session-speaker">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                  Omri Rajuan
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="time-col">15:50 - 16:25</td>
+            <td colspan="2" class="common-event" style="padding: 0">
+              <a
+                href="https://react-next.com/events/um-actually-a-gameshow-about-being-confidently-wrong/"
+                target="_blank"
+                style="padding: 1.5rem"
+              >
+                <div style="font-size: 1.1rem; margin-bottom: 0.5rem">
+                  Um, Actually: A Gameshow About Being (Confidently) Wrong
+                </div>
+                <div
+                  style="
+                    font-size: 0.9rem;
+                    font-weight: normal;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                  Tal Mizrachi, Dean Langsam, Shani Geva, Yuval Shalom, Yariv
+                  Shamash
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="time-col">16:25 - 16:40</td>
+            <td colspan="2" class="common-event" style="padding: 0">
+              <a
+                href="https://react-next.com/events/closing-words-and-raffles/"
+                target="_blank"
+                style="padding: 1.5rem"
+              >
+                Closing Words and Raffles
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
