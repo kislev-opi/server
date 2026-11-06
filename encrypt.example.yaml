@@ -1,0 +1,5 @@
+# Copy to encrypt.yaml (git-ignored) and fill in real keys.
+# Only files listed here are encrypted; files already encrypted are skipped.
+files:
+  ine.html: change-me
+  cyber-1981.html: change-me-too
